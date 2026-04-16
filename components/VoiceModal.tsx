@@ -27,6 +27,8 @@ export const VoiceModal: React.FC<VoiceModalProps> = ({ isOpen, onClose, userPro
   const formattedLng = formatCoordinate(lng, 'lng');
   const displayCoordinates = `${formattedLat} / ${formattedLng}`;
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   useEffect(() => {
     if (isOpen && status === LiveConnectionState.Disconnected) {
       connect();
@@ -38,10 +40,14 @@ export const VoiceModal: React.FC<VoiceModalProps> = ({ isOpen, onClose, userPro
   }, [isOpen]);
 
   const connect = async () => {
+      setErrorMessage(null);
       const newSession = new LiveSession();
       
       newSession.onStatusChange = (s) => {
         setStatus(s as LiveConnectionState);
+        if (s === 'error') {
+            setErrorMessage("Mikrofon erişimi reddedildi veya tarayıcı desteklemiyor. (Mic access denied or unsupported)");
+        }
       };
       
       newSession.onAudioLevel = (level) => {
@@ -131,9 +137,10 @@ export const VoiceModal: React.FC<VoiceModalProps> = ({ isOpen, onClose, userPro
            {/* Visualizer Circle / Error State */}
            <div className="relative w-32 h-32 flex items-center justify-center">
              {status === LiveConnectionState.Error ? (
-                 <div className="flex flex-col items-center justify-center text-red-500 animate-pulse">
+                 <div className="flex flex-col items-center justify-center text-red-500 animate-pulse text-center">
                      <AlertTriangle size={48} />
-                     <span className="text-[10px] font-bold mt-2 uppercase tracking-widest text-center">Network Error<br/>Link Lost</span>
+                     <span className="text-[10px] font-bold mt-2 uppercase tracking-widest">Network Error<br/>Link Lost</span>
+                     {errorMessage && <span className="text-[9px] mt-2 text-red-400 opacity-80 max-w-[120px] leading-tight">{errorMessage}</span>}
                  </div>
              ) : (
                  <>
