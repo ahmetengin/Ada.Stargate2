@@ -1,0 +1,52 @@
+# Ada.sea.Phisedelia Rules Configuration
+# Version: 1.0.0
+# Status: Initialization
+# Description: This file is the "Hard Truth" for the Phisedelia Racing Yacht Tenant based on the Tactical Spec.
+# Agents must read this before making operational decisions.
+
+tenant:
+  id: "phisedelia"
+  name: "S/Y Phisedelia"
+  vessel_type: "VO65 Racing Yacht"
+  flag: "MT" # Malta
+
+operational_limits:
+  max_speed_knots: 30.0 # VMG limits are dynamic based on polar
+  max_heel_angle_deg: 25.0 # Beyond this, reduce sail automatically
+  min_depth_m: 3.0 # Maintain minimum keel clearance
+  colregs_safe_distance_nm: 0.5 # Minimum CPA for collision avoidance
+  
+racing_rules:
+  osr_category: "Category 1" # Ocean Race Sailing Rules
+  boundary_check_radius_m: 50.0 # Distance from race boundary to trigger alert
+  
+system_thresholds:
+  service_battery_critical_v: 23.0 # Below this, auto-start generator
+  fuel_critical_pct: 15 # Below this, alert for refueling
+  bilge_high_water_level_cm: 10 # Trigger bilge pump and alarm
+  
+communication_protocols:
+  vhf_emergency_channel: "16"
+  vhf_race_channel: "77"
+  satellite_link_active: true # Starlink / Iridium
+
+# Document requirements for Race Check-in
+required_documents_race:
+  - "Vessel Measurement Certificate"
+  - "Sail Inventory Certificate"
+  - "Safety Equipment Certificate"
+  - "World Sailing OSR Compliance"
+  - "Crew Medical Certificates"
+
+# Sensor & System Configuration
+sensors:
+  nmea2000_active: true
+  ais_transponder_active: true
+  radar_active: true
+  camera_active: true
+
+autonomy_levels:
+  colregs_collision_avoidance: L3 # Full autonomy
+  sail_trim_optimization: L2 # Human approval for major changes
+  engine_start_stop: L3_CRITICAL_ONLY # Auto-start on low battery
+  route_selection: L1 # Suggestion with detailed log

@@ -1,0 +1,32 @@
+[
+  {
+    "topic": "quiet-hours",
+    "title": "Noise Pollution and Quiet Hours",
+    "article": "F.9",
+    "text": "Quiet hours are strictly enforced between 23:00 and 08:00. Engine tests, generator operation (unless authorized), and loud music are prohibited."
+  },
+  {
+    "topic": "fueling",
+    "title": "Fueling Protocol",
+    "article": "E.2.16",
+    "text": "Fueling is only permitted at the dedicated Lukoil station. Truck-to-ship bunkering requires specific management approval and liability insurance."
+  },
+  {
+    "topic": "drone",
+    "title": "Drone Usage",
+    "article": "G.12",
+    "text": "Unauthorized drone flights are prohibited over the marina and boatyard areas due to privacy and safety regulations."
+  },
+  {
+    "topic": "swimming",
+    "title": "Swimming in Marina",
+    "article": "F.10",
+    "text": "Swimming and diving within the marina basin is strictly prohibited due to electrical leakage risks and vessel traffic."
+  },
+  {
+    "topic": "departure",
+    "title": "Departure Clearance",
+    "article": "E.7.8",
+    "text": "Vessels must settle all outstanding debts before departure. The Marina reserves the right to detain vessels with unpaid balances (Right of Retention)."
+  }
+]

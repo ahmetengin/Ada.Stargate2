@@ -1,0 +1,31 @@
+
+policies:
+  unauthorized_berth_usage:
+    severity: HIGH
+    fine: 2500
+  overstay:
+    severity: MEDIUM
+    fine_per_day: 400
+  restricted_area_intrusion:
+    severity: CRITICAL
+    notify_security: true
+  documentation_missing:
+    severity: LOW
+    grace_period_days: 7
+  
+  # IDENTITY & GUEST MANAGEMENT (NEW LAW)
+  unregistered_guest_entry:
+    severity: CRITICAL
+    fine: 5000
+    action: "Immediate Law Enforcement Notification"
+    description: "Entering marina without ID scan and Police notification."
+  
+  id_mismatch:
+    severity: HIGH
+    action: "Access Denied"
+    description: "Presented ID does not match PassKit holder."
+
+  unauthorized_overnight:
+    severity: MEDIUM
+    fine_per_night: 150
+    description: "Guest staying overnight without Check-in record."

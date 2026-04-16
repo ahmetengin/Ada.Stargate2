@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  ada-orchestrator:
+    container_name: ada_orchestrator
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # This matches the ARG in the Dockerfile
+      args:
+        - API_KEY=${API_KEY}
+    ports:
+      - "3000:80"
+    restart: always
+    depends_on:
+      - ada-redis-broker
+      - ada-nats-jetstream
+
+  # Simulated Redis Broker for the Distributed Node System
+  ada-redis-broker:
+    image: redis:alpine
+    container_name: ada_redis_broker
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - redis_data:/data
+
+  # NATS JetStream - The "Light Speed" Agentic Mesh
+  ada-nats-jetstream:
+    image: nats:alpine
+    container_name: ada_nats_jetstream
+    command: "-js -m 8222" # Enable JetStream and Monitoring
+    ports:
+      - "4222:4222" # Client Port
+      - "8222:8222" # Dashboard/Monitoring Port
+    volumes:
+      - nats_data:/data
+      - ./backend/streams:/streams # Load stream definitions
+
+volumes:
+  redis_data:
+  nats_data:
